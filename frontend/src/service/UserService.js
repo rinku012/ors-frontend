@@ -11,7 +11,7 @@ class UserService {
     signUp(userData) {
         // We set roleId to 4 (Student) by default for self-registration
         const data = { ...userData, roleId: 4 };
-        return httpClient.post("/User/signUp", data);
+        return httpClient.post("User/signUp", data);
     }
 
     // Get all users (Admin only)
