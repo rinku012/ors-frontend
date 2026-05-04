@@ -2,22 +2,24 @@ import httpClient from '../BaseConfig';
 
 class CollegeService {
     // Save or Update a College
-    save(data) {
-        // httpClient handles the http://localhost:8080/ORSAPI part automatically
-        return httpClient.post("/College/save", data);
+    save(data, roleId) {
+        // We append the roleId as a query parameter so the Backend Controller 
+        // can verify if the user is an Admin (1).
+        return httpClient.post(`/College/save?activeRoleId=${roleId}`, data);
     }
 
-    // Get the list of all Colleges
+    // Get the list of all Colleges (Usually for the Table view)
     list() {
         return httpClient.get("/College/list");
     }
 
     // Delete a College by ID
-    delete(id) {
-        return httpClient.get(`/College/delete/${id}`);
+    // Added roleId here too because your Controller's delete method checks for Admin
+    delete(id, roleId) {
+        return httpClient.get(`/College/delete/${id}?activeRoleId=${roleId}`);
     }
 
-    // Optional: Get a single College for editing
+    // Get a single College for editing
     getById(id) {
         return httpClient.get(`/College/get/${id}`);
     }

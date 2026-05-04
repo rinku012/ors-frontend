@@ -5,6 +5,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
 
+    // Access roleId from user object
+    const roleId = user ? user.roleId : null;
+
     const handleLogout = () => {
         localStorage.removeItem("user");
         navigate('/login');
@@ -30,21 +33,37 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
+                                <li className="nav-item">
+                                    <span className="nav-link text-info me-2">Hi, {user.firstName}!</span>
+                                </li>
                                 <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link></li>
                                 
-                                {(user.roleId === 1 || user.roleId === 3) && (
+                                {/* Management Dropdown: Visible to Admin (1) and Faculty (3) */}
+                                {(roleId === 1 || roleId === 3) && (
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" href="#!" id="mgmt" data-bs-toggle="dropdown">
                                             Management
                                         </a>
                                         <ul className="dropdown-menu dropdown-menu-dark shadow">
-                                            <li><Link className="dropdown-item" to="/add-college">Add College</Link></li>
-                                            <li><Link className="dropdown-item" to="/college-list">College List</Link></li>
-                                            <li><hr className="dropdown-divider" /></li>
+                                            {/* ADMIN ONLY: College Management */}
+                                            {roleId === 1 && (
+                                                <>
+                                                    <li><h6 className="dropdown-header text-secondary">College Admin</h6></li>
+                                                    <li><Link className="dropdown-item" to="/add-college">Add College</Link></li>
+                                                    <li><Link className="dropdown-item" to="/college-list">College List</Link></li>
+                                                    <li><hr className="dropdown-divider" /></li>
+                                                </>
+                                            )}
+
+                                            {/* ADMIN & FACULTY: Student & Marksheet */}
+                                            <li><h6 className="dropdown-header text-secondary">Academic Management</h6></li>
                                             <li><Link className="dropdown-item" to="/student">Add Student</Link></li>
                                             <li><Link className="dropdown-item" to="/student-list">Student List</Link></li>
                                             <li><hr className="dropdown-divider" /></li>
                                             <li><Link className="dropdown-item" to="/marksheet">Add Marksheet</Link></li>
+                                            <Link className="dropdown-item" to="/marksheet-list">Marksheet List</Link>
+                                            <Link className="dropdown-item" to="/course">Add Course</Link>
+                                            
                                         </ul>
                                     </li>
                                 )}

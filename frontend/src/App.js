@@ -14,6 +14,12 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import StudentList from './pages/StudentList';
 import Student from './pages/Student';
+import College from './pages/College';
+import CollegeList from './pages/CollegeList';
+import Marksheet from './pages/Marksheet';
+import MarksheetList from './pages/MarksheetList';
+import Course from './pages/Course';
+
 
 const LayoutWrapper = ({ children }) => {
     const location = useLocation();
@@ -45,6 +51,12 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/student-list" element={<StudentList />} />
                     <Route path="/student" element={<Student />} />
+                    <Route path="/add-college" element={<College />} />
+                    <Route path="/college-list" element={<CollegeList />} />
+                    <Route path="/marksheet" element={<Marksheet />} />
+                    <Route path="/marksheet-list" element={<MarksheetList />} />
+                    <Route path="/course" element={<Course />} />
+                    
                     <Route path="/" element={<Navigate to="/login" />} />
                 </Routes>
             </LayoutWrapper>

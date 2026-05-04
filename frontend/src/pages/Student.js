@@ -50,13 +50,13 @@ const Student = () => {
                 <input type="text" name="mobileNo" className="form-control mb-3" placeholder="Mobile No" onChange={handleChange} required />
 
                 {/* College Dropdown */}
-                <select name="collegeId" className="form-control mb-3" onChange={handleChange} required>
+                <select name="collegeName" className="form-control mb-3" onChange={handleChange} required>
                     <option value="">Select College</option>
                     {colleges.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                 </select>
 
                 {/* Course Dropdown */}
-                <select name="courseId" className="form-control mb-3" onChange={handleChange} required>
+                <select name="courseName" className="form-control mb-3" onChange={handleChange} required>
                     <option value="">Select Course</option>
                     {courses.map(c => <option key={c.id} value={c.id}>{c.courseName}</option>)}
                 </select>

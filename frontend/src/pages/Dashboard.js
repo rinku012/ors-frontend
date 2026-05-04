@@ -8,6 +8,12 @@ const Dashboard = () => {
     useEffect(() => {
         // Retrieve user from localStorage
         const loggedInUser = localStorage.getItem("user");
+        const roleMapping = {
+    1: "Admin",
+    2: "College",
+    3: "Faculty",
+    4: "Student"
+};
         if (loggedInUser) {
             setUser(JSON.parse(loggedInUser));
         } else {
